@@ -37,7 +37,8 @@
     "react-native": "*"
   },
   "dependencies": {
-    "prop-types": "^15.8.1",
+    "prop-types": "^15.0 || ^16.0",
+    "react-native-device-info": "^10.13.1",
     "react-native-iphone-screen-helper": "^2.0.2"
   },
   "devDependencies": {

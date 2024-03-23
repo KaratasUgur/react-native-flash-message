@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Dimensions, Platform, StatusBar, StyleSheet } from "react-native";
 import { isIphoneX, getStatusBarHeight } from "react-native-iphone-screen-helper";
+import DeviceInfo from "react-native-device-info";
 import PropTypes from "prop-types";
 
 /**
@@ -16,6 +17,10 @@ const { height: D_HEIGHT, width: D_WIDTH } = Dimensions.get("window");
 const isAndroid = Platform.OS === "android";
 
 const isIPhoneX = isIphoneX();
+
+export function isDynamicIsland() {
+  return Platform.OS === "ios" && !Platform.isPad && !Platform.isTV && DeviceInfo.hasDynamicIsland();
+}
 
 const isIPad = (() => {
   if (Platform.OS !== "ios" || isIPhoneX) return false;
@@ -65,6 +70,10 @@ export function getFlashMessageStatusBarHeight(isLandscape = false, _customStatu
 
   if (isIPad) {
     return 20;
+  }
+
+  if(isDynamicIsland()) {
+    return isLandscape ? 0 : 55;
   }
 
   return isLandscape ? 0 : 20;
